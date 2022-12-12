@@ -1,4 +1,3 @@
-import copy
 import queue
 
 # convert a lower case letter to an integer value
@@ -20,10 +19,12 @@ def is_valid_move(grid, current, next):
         return False
 
 
+# Compute the Manhattan distance between the current state and the goal state
 def distance_from_goal(current, goal):
     return abs(current[0] - goal[0]) + abs(current[1] - goal[1]) 
 
-# Find the number of steps needed for the shortest path
+
+# Find the number of steps needed for the shortest path using an A-star search algorithm
 def a_star_search(grid, start, end):
     lowest_step = float("inf")
     lowest_path_from = {}
@@ -103,13 +104,13 @@ lines = None
 with open("Day12.txt", "r") as file:
     lines = file.readlines()
 
+# Clean the input data by removing the \n from the end of each line
 for i in range(len(lines)):
     lines[i] = lines[i].rstrip()
 
-    
+# Find the start and end positions
 start = None
 end = None
-# Find the start and end positions
 for i, row in enumerate(lines):
     for j, value in enumerate(row):
         if value == "S":
@@ -121,7 +122,7 @@ for i, row in enumerate(lines):
 answer = a_star_search(lines, start, end)
 print(answer)
 
-# Run an A-star search from every starting point
+# Run an A-star search from every starting point to determine the optimal starting position
 lowest_step = float("inf")
 for i, row in enumerate(lines):
     for j, value in enumerate(row):
